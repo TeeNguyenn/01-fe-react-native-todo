@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {
     Button,
+    FlatList,
     ScrollView,
     StyleSheet,
     Text,
@@ -27,7 +28,25 @@ export default function App() {
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 20 }}>Hello world</Text>
-            <ScrollView>
+            <FlatList
+                data={students}
+                keyExtractor={(item) => item.id + ''}
+                renderItem={({ item }) => (
+                    <Text
+                        style={{
+                            color: 'white',
+                            fontSize: 20,
+                            padding: 20,
+                            backgroundColor: 'green',
+                            marginBottom: 20,
+                            marginRight: 20,
+                        }}
+                    >
+                        {item.name}
+                    </Text>
+                )}
+            ></FlatList>
+            {/* <ScrollView>
                 {students.map((item) => (
                     <Text
                         key={item.id}
@@ -42,7 +61,7 @@ export default function App() {
                         {item.name}
                     </Text>
                 ))}
-            </ScrollView>
+            </ScrollView> */}
         </View>
     );
 }
