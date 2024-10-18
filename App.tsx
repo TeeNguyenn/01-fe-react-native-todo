@@ -1,51 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+    Button,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+} from 'react-native';
 import React, { useState } from 'react';
 
 export default function App() {
-    const [count, setCount] = useState<number>(0);
-    const [name, setName] = useState<string>('');
-    const [age, setAge] = useState<number>(0);
-
+    const [students, setStudents] = useState([
+        { id: 1, name: 'Tee', age: 21 },
+        { id: 2, name: 'Tee1', age: 21 },
+        { id: 3, name: 'Tee2', age: 21 },
+        { id: 4, name: 'Tee3', age: 21 },
+        { id: 5, name: 'Tee4', age: 21 },
+        { id: 6, name: 'Tee5', age: 21 },
+        { id: 7, name: 'Tee6', age: 21 },
+        { id: 8, name: 'Tee7', age: 21 },
+        { id: 9, name: 'Tee8', age: 21 },
+        { id: 10, name: 'Tee9', age: 21 },
+        { id: 11, name: 'Tee10', age: 21 },
+        { id: 12, name: 'Tee11', age: 21 },
+    ]);
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={{ fontWeight: '600', fontSize: 30 }}>
-                    Name: {name}
-                </Text>
-                <TextInput
-                    autoCapitalize="sentences"
-                    style={{
-                        borderColor: 'green',
-                        borderWidth: 1,
-                        padding: 5,
-                        width: 200,
-                    }}
-                    onChangeText={(value) => setName(value)}
-                ></TextInput>
-            </View>
-            <View>
-                <Text style={{ fontWeight: '600', fontSize: 30 }}>
-                    Age: {age}
-                </Text>
-                <TextInput
-                    style={{
-                        borderColor: 'green',
-                        borderWidth: 1,
-                        padding: 5,
-                        width: 200,
-                    }}
-                    onChangeText={(value) => setAge(value)}
-                    keyboardType="numeric"
-                    maxLength={2}
-                ></TextInput>
-            </View>
-            <View>
-                <Button
-                    title="Increase"
-                    onPress={() => setCount(count + 1)}
-                ></Button>
-            </View>
+            <Text style={{ fontSize: 20 }}>Hello world</Text>
+            <ScrollView>
+                {students.map((item) => (
+                    <Text
+                        key={item.id}
+                        style={{
+                            color: 'white',
+                            fontSize: 20,
+                            padding: 20,
+                            backgroundColor: 'green',
+                            marginBottom: 20,
+                        }}
+                    >
+                        {item.name}
+                    </Text>
+                ))}
+            </ScrollView>
         </View>
     );
 }
@@ -54,8 +51,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop: 50,
+        paddingHorizontal: 20,
     },
     text: { color: 'green', fontSize: 30 },
 });
