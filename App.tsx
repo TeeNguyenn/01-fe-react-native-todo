@@ -10,58 +10,53 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 
+interface ITodo {
+    id: number;
+    name: string;
+}
+
 export default function App() {
-    const [students, setStudents] = useState([
-        { id: 1, name: 'Tee', age: 21 },
-        { id: 2, name: 'Tee1', age: 21 },
-        { id: 3, name: 'Tee2', age: 21 },
-        { id: 4, name: 'Tee3', age: 21 },
-        { id: 5, name: 'Tee4', age: 21 },
-        { id: 6, name: 'Tee5', age: 21 },
-        { id: 7, name: 'Tee6', age: 21 },
-        { id: 8, name: 'Tee7', age: 21 },
-        { id: 9, name: 'Tee8', age: 21 },
-        { id: 10, name: 'Tee9', age: 21 },
-        { id: 11, name: 'Tee10', age: 21 },
-        { id: 12, name: 'Tee11', age: 21 },
-    ]);
+    const [todo, setTodo] = useState('');
+
+    const [todoList, setTodoList] = useState<ITodo[]>([]);
+
+    function randomInteger(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const handleTodo = () => {
+        if (!todo.trim()) {
+            setTodo("");
+            return;
+        }
+        setTodoList([
+            ...todoList,
+            { id: randomInteger(2, 100000), name: todo },
+        ]);
+        setTodo('');
+    };
+
     return (
         <View style={styles.container}>
-            <Text style={{ fontSize: 20 }}>Hello world</Text>
-            <FlatList
-                data={students}
-                keyExtractor={(item) => item.id + ''}
-                renderItem={({ item }) => (
-                    <Text
-                        style={{
-                            color: 'white',
-                            fontSize: 20,
-                            padding: 20,
-                            backgroundColor: 'green',
-                            marginBottom: 20,
-                            marginRight: 20,
-                        }}
-                    >
-                        {item.name}
-                    </Text>
-                )}
-            ></FlatList>
-            {/* <ScrollView>
-                {students.map((item) => (
-                    <Text
-                        key={item.id}
-                        style={{
-                            color: 'white',
-                            fontSize: 20,
-                            padding: 20,
-                            backgroundColor: 'green',
-                            marginBottom: 20,
-                        }}
-                    >
-                        {item.name}
-                    </Text>
-                ))}
-            </ScrollView> */}
+            {/* Header */}
+            <Text style={styles.header}>Todo App</Text>
+            {/* Form */}
+            <View style={styles.body}>
+                <TextInput
+                value={todo}
+                    style={styles.todoInput}
+                    onChangeText={(value) => setTodo(value)}
+                ></TextInput>
+                <Button title="Add todo" onPress={handleTodo}></Button>
+            </View>
+            {/* List */}
+            <View style={styles.body}>
+                <FlatList
+                    data={todoList}
+                    renderItem={({ item }) => (
+                        <Text style={styles.todoItem}>{item.name}</Text>
+                    )}
+                ></FlatList>
+            </View>
         </View>
     );
 }
@@ -71,7 +66,30 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         paddingTop: 50,
-        paddingHorizontal: 20,
     },
-    text: { color: 'green', fontSize: 30 },
+    header: {
+        fontSize: 30,
+        backgroundColor: 'green',
+        padding: 20,
+        textAlign: 'center',
+        color: 'white',
+    },
+    todoInput: {
+        borderBottomWidth: 1,
+        borderBottomColor: 'orange',
+        padding: 10,
+        marginBottom: 30,
+        fontSize: 20,
+    },
+    body: {
+        paddingHorizontal: 30,
+    },
+    todoItem: {
+        fontSize: 20,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: 'orange',
+        borderStyle: 'dashed',
+        marginTop: 20,
+    },
 });
