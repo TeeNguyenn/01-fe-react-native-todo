@@ -2,10 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import {
     Button,
     FlatList,
+    Pressable,
     ScrollView,
     StyleSheet,
     Text,
     TextInput,
+    TouchableOpacity,
     View,
 } from 'react-native';
 import React, { useState } from 'react';
@@ -35,6 +37,11 @@ export default function App() {
         setTodo('');
     };
 
+    const deleteTodo = (id: number) => {
+        const newTodoList = todoList.filter(item => item.id !== id);
+        setTodoList(newTodoList);
+    }
+
     return (
         <View style={styles.container}>
             {/* Header */}
@@ -53,7 +60,9 @@ export default function App() {
                 <FlatList
                     data={todoList}
                     renderItem={({ item }) => (
-                        <Text style={styles.todoItem}>{item.name}</Text>
+                        <Pressable onPress={() => deleteTodo(item.id)} style={({ pressed }) =>  ({opacity:pressed ? 0.5 : 1})}>
+                            <Text style={styles.todoItem}>{item.name}</Text>
+                        </Pressable>
                     )}
                 ></FlatList>
             </View>
