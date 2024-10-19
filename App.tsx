@@ -1,13 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import {
+    Alert,
     Button,
     FlatList,
+    Keyboard,
     Pressable,
     ScrollView,
     StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     View,
 } from 'react-native';
 import React, { useState } from 'react';
@@ -28,6 +31,14 @@ export default function App() {
     const handleTodo = () => {
         if (!todo.trim()) {
             setTodo("");
+            Alert.alert('Error!!!', 'Todo is not empty!!!', [
+                
+                {
+                    text: 'OK',
+                    onPress: () => console.log(),
+                    style: 'default'
+                },
+            ])
             return;
         }
         setTodoList([
@@ -43,6 +54,7 @@ export default function App() {
     }
 
     return (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> 
         <View style={styles.container}>
             {/* Header */}
             <Text style={styles.header}>Todo App</Text>
@@ -67,6 +79,7 @@ export default function App() {
                 ></FlatList>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     );
 }
 
