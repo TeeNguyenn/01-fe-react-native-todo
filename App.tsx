@@ -7,9 +7,10 @@ import HomeScreen from './components/review/home';
 import DetailScreen from './components/review/detail';
 import AboutScreen from './components/review/about';
 import { OPENSAN_REGULAR } from './utils/const';
-
+import AppNavigation from './components/navigation/app.navigation';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,15 +28,12 @@ const App = () => {
       if (!loaded && !error) {
         return null;
       }
-      const Stack = createNativeStackNavigator<StackParamList>();
+      
     // 6:0:0
     return (
         
         <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="home" component={HomeScreen} options={{ title: 'Home' }}/>
-          <Stack.Screen name="review-detail" component={DetailScreen} options={{ title: 'Review' }}/>
-        </Stack.Navigator>
+          <AppNavigation/>
       </NavigationContainer>
     );
 };

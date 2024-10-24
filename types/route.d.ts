@@ -1,4 +1,4 @@
 type StackParamList = {
     home: undefined;
-    'review-detail': undefined;
+    'review-detail': { id: number; title: string; star: number } | undefined;
 }
