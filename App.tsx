@@ -9,6 +9,7 @@ import AboutScreen from './components/review/about';
 import { OPENSAN_REGULAR } from './utils/const';
 import AppNavigation from './components/navigation/app.navigation';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -32,9 +33,11 @@ const App = () => {
     // 6:0:0
     return (
         
-        <NavigationContainer>
-          <AppNavigation/>
-      </NavigationContainer>
+        <SafeAreaView style={{flex: 1}}>
+          <NavigationContainer>
+            <AppNavigation/>
+        </NavigationContainer>
+        </SafeAreaView>
     );
 };
 

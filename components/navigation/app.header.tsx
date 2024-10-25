@@ -11,10 +11,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         paddingVertical: 10,
         backgroundColor: '#ccc',
-        paddingTop: 40
     },
     headerText: {
-        width: '100%',
+       flex: 1,
         textAlign: 'center',
         fontSize: 20,
         fontWeight: '600'
